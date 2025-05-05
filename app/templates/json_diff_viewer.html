@@ -3,37 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Diff Viewer</title>
+    <title>Diff Viewer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/idea.min.css">
     <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
         #json-diff-container {
             display: flex;
             justify-content: space-between;
             gap: 20px;
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .json-column {
             flex: 1;
             display: flex;
             flex-direction: column;
         }
+        textarea {
+            flex: 1;
+            resize: none;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow: auto;
+            box-sizing: border-box;
+        }
         .CodeMirror {
             border: 1px solid #ccc;
-            height: 300px;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <h1>JSON Diff Viewer</h1>
-    <!-- <div id="diffOutput" style="white-space: pre-wrap; font-family: monospace;"></div> -->
+    <h1>Diff Viewer</h1>
     <div id="json-diff-container">
         <div class="json-column">
-            <h2>Original JSON</h2>
             <textarea id="json1" placeholder="Paste original JSON here">{{ json1 | tojson(indent=4) }}</textarea>
         </div>
         <div class="json-column">
-            <h2>Modified JSON</h2>
             <textarea id="json2" placeholder="Paste modified JSON here">{{ json2 | tojson(indent=4) }}</textarea>
         </div>
     </div>
