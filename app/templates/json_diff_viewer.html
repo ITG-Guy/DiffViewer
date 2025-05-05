@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Diff Viewer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/idea.min.css">
+    <style>
+        #json-diff-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .json-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .CodeMirror {
+            border: 1px solid #ccc;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JSON Diff Viewer</h1>
+    <!-- <div id="diffOutput" style="white-space: pre-wrap; font-family: monospace;"></div> -->
+    <div id="json-diff-container">
+        <div class="json-column">
+            <h2>Original JSON</h2>
+            <textarea id="json1" placeholder="Paste original JSON here">{{ json1 | tojson(indent=4) }}</textarea>
+        </div>
+        <div class="json-column">
+            <h2>Modified JSON</h2>
+            <textarea id="json2" placeholder="Paste modified JSON here">{{ json2 | tojson(indent=4) }}</textarea>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/deep-diff@1.0.2/dist/deep-diff.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script src="{{ url_for('static', filename='js/json_diff_viewer.js') }}"></script>
+</body>
+</html>
